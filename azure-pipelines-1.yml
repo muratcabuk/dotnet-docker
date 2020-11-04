@@ -3,6 +3,9 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+resources:
+- repo: self
+
 parameters:
   - name: version
     displayName: Version
@@ -11,8 +14,18 @@ parameters:
 
 
 trigger: none
-pool:
-  vmImage: 'windows-2019'
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'e9f1b348-10e7-4f61-8413-ca458fabb386'
+  imageRepository: 'muratcabukdotnetdocker'
+  containerRegistry: 'swarmtest.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/src/aspnet/3.1/nanoserver-1809/amd64/Dockerfile'
+  tag: '$(Build.BuildId)'
+  version: ${{ parameters.version }}
+  
+  # Agent VM image name
+  vmImageName: 'windows-2019'
 
 stages:
   - stage: Build
@@ -26,7 +39,7 @@ stages:
       - task: CmdLine@2
         inputs:
           script: |
-            git checkout ${{ parameters.version }}
+            git checkout $(version)
       - task: Docker@2
         displayName: Build and push an image to container registry
         inputs:
@@ -36,3 +49,4 @@ stages:
           containerRegistry: $(dockerRegistryServiceConnection)
           tags: |
             $(tag)
+            $(version)
