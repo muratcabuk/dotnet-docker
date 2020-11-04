@@ -9,6 +9,8 @@ parameters:
     type: string
     default: v1.0.0
 
+
+trigger: none
 pool:
   vmImage: 'windows-2019'
 
@@ -23,3 +25,5 @@ stages:
             echo Write your commands here
           
             echo ${{ parameters.version }}
+
+            git checkout ${{ parameters.version }}
