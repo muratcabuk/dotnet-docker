@@ -2,8 +2,6 @@
 ![Build Status](https://dev.azure.com/muratcabuktests/SwarmTest/_apis/build/status/muratcabuk.dotnet-docker?branchName=master)
 
 
-https://dev.azure.com/muratcabuktests/SwarmTest/_build/latest?definitionId=1&branchName=master
-
 # Featured Repos
 
 ## .NET Core 2.1/3.1
