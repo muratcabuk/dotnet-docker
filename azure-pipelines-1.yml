@@ -1,0 +1,25 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+parameters:
+  - name: version
+    displayName: Version
+    type: string
+    default: v1.0.0
+
+pool:
+  vmImage: 'windows-2019'
+
+stages:
+  - stage: Git
+    jobs:
+    - job: checkout
+      steps:
+      - task: CmdLine@2
+        inputs:
+          script: |
+            echo Write your commands here
+          
+            echo Hello world
