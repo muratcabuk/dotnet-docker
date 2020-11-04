@@ -15,15 +15,24 @@ pool:
   vmImage: 'windows-2019'
 
 stages:
-  - stage: Git
-    jobs:
-    - job: checkout
+  - stage: Build
+    displayName: Build and push stage
+    jobs:  
+    - job: Build
+      displayName: Build
+      pool:
+        vmImage: $(vmImageName)
       steps:
       - task: CmdLine@2
         inputs:
           script: |
-            echo Write your commands here
-          
-            echo ${{ parameters.version }}
-
             git checkout ${{ parameters.version }}
+      - task: Docker@2
+        displayName: Build and push an image to container registry
+        inputs:
+          command: buildAndPush
+          repository: $(imageRepository)
+          dockerfile: $(dockerfilePath)
+          containerRegistry: $(dockerRegistryServiceConnection)
+          tags: |
+            $(tag)
