@@ -20,7 +20,7 @@ variables:
   dockerRegistryServiceConnection: 'e9f1b348-10e7-4f61-8413-ca458fabb386'
   imageRepository: 'muratcabukdotnetdocker'
   containerRegistry: 'swarmtest.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/src/aspnet/3.1/nanoserver-1809/amd64/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/samples/aspnetapp/Dockerfile.nanoserver-x64'
   tag: '$(Build.BuildId)'
   version: ${{ parameters.version }}
   
