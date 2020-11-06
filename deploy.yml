@@ -1,4 +1,4 @@
-# Starter pipeline
+  # Starter pipeline
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -12,13 +12,14 @@ parameters:
     default: v1.0.0
     type: string
 
-pool: 
-  name: 'Default'
+pool:
+  name: Default
   demands:
   - Agent.Name -equals node1
 
 
-- script: |
+steps:
+- bash: |
     docker service update --name swarmtest --image swarmtest.azurecr.io/muratcabukdotnetdocker:${{ parameters.version }}
     echo bitti
-  displayName: 'Deploy'
+  displayName: Deploy
