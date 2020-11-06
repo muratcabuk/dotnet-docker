@@ -17,9 +17,9 @@ pool:
   demands:
   - Agent.Name -equals node1
 
-
 steps:
-- bash: |
-    docker service update --name swarmtest --image swarmtest.azurecr.io/muratcabukdotnetdocker:${{ parameters.version }}
-    echo bitti
-  displayName: Deploy
+- task: CmdLine@2
+  inputs:
+    script: |
+      docker service update --name swarmtest --image swarmtest.azurecr.io/muratcabukdotnetdocker:${{ parameters.version }}
+      echo bitti
