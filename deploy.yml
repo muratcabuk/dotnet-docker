@@ -4,16 +4,21 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+- none
 
-pool:
-  vmImage: 'ubuntu-latest'
+parameters:
+  - name: version
+    displayName: Version
+    default: v1.0.0
+    type: string
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+pool: 
+  name: 'Default'
+  demands:
+  - Agent.Name -equals node1
+
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    docker service update --name swarmtest --image swarmtest.azurecr.io/muratcabukdotnetdocker:${{ parameters.version }}
+    echo bitti
+  displayName: 'Deploy'
